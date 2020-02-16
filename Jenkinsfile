@@ -11,15 +11,7 @@ pipeline
              }
       }
 
-      stage('validate job')
-      {
-        steps{
-               withMaven(jdk: 'localjdk', maven: 'localmaven') {
-        sh 'mvn validate'
-                }
-             }
-
-      stage('compile job')
+     stage('compile job')
       {
         steps{
                withMaven(jdk: 'localjdk', maven: 'localmaven') {
@@ -29,5 +21,4 @@ pipeline
 
       }
     }
-   }
-}
+ }
