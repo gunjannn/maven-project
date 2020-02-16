@@ -10,14 +10,24 @@ pipeline
 	     git branch: 'master', url: 'https://github.com/gunjannn/maven-project.git'
 	   }
     }
+
 	 stage('validate code')
 {
 steps
   {
 withMaven(jdk: 'localjdk', maven: 'localmaven') {
-    'sh mvn vaidate'
+    sh 'mvn vaidate'
 }
 }
+
+
+stage ('compile code')
+{
+steps
+   {
+withMaven(jdk: 'localjdk', maven: 'localmaven') {
+    sh 'mvn compile'
 }
  }
  }
+}
