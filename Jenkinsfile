@@ -11,11 +11,11 @@ pipeline
              }
       }
 
-     stage('compile job')
+     stage('test job')
       {
         steps{
                withMaven(jdk: 'localjdk', maven: 'localmaven') {
-        sh 'mvn compile'
+        sh 'mvn test'
                 }
              }
 
