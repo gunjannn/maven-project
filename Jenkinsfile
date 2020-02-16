@@ -15,7 +15,7 @@ pipeline
       {
         steps{
                withMaven(jdk: 'localjdk', maven: 'localmaven') {
-        sh 'mvn complie'
+        sh 'mvn compile'
                 }
              }
 
