@@ -30,5 +30,4 @@ withMaven(jdk: 'localjdk', maven: 'localmaven') {
 }
 }
 }
-}
     
