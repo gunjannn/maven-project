@@ -11,6 +11,7 @@ pipeline
      }
 
      stage('validate code')
+{
 steps
   {
 withMaven(jdk: 'localjdk', maven: 'localmaven') {
@@ -19,6 +20,7 @@ withMaven(jdk: 'localjdk', maven: 'localmaven') {
 }
 
     stage ('compile code')
+{
 steps
    {
 withMaven(jdk: 'localjdk', maven: 'localmaven') {
@@ -27,5 +29,6 @@ withMaven(jdk: 'localjdk', maven: 'localmaven') {
 }
 }
 }
-
+}
+}
     
