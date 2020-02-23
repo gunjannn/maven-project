@@ -2,16 +2,17 @@ pipeline
 {
 agent any
 stages {
+
 stage('scm checkout')
 {
 steps 
 {
 git branch:'master' url:'https://github.com/gunjannn/maven-project.git'
 }
+}
 
-stage ('parallel stage')
-
-parallel
+ stage ('parallel stage')
+ parallel
 {
 stage('test')
 { 
