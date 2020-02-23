@@ -17,7 +17,7 @@ steps
 {
 withMaven(jdk: 'localjdk', maven: 'localmaven') 
 {
-sh 'mvn test'
+sh 'mvn tast'
 }}}
 
 stage('package')
@@ -28,6 +28,7 @@ withMaven(jdk: 'localjdk', maven: 'localmaven')
 {
 sh 'mvn package'
 }}}
+failFast:true
 }
 }
 }
