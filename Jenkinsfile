@@ -10,7 +10,7 @@ stages
 stage ('parallel stage')
 {
 parallel
-
+{
 stage('maven test')
 { 
 steps
@@ -18,7 +18,7 @@ steps
 withMaven(jdk: 'localjdk', maven: 'localmaven') 
 {
 sh 'maven test'
-}}
+}}}
 
 stage('package')
 { 
@@ -27,11 +27,11 @@ steps
 WithMaven(jdk: 'localjdk', maven: 'localmaven')
 {
 sh 'maven package'
-}}
+}}}
 }
 }
 }
 }
-}
+
 
 
