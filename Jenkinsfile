@@ -1,25 +1,27 @@
 pipeline
 {
 agent any
-stages {
-
-stage('scm checkout')
+stages 
 {
-steps 
-{
-git branch:'master' url :'https://github.com/gunjannn/maven-project.git'
-}
-}
+ stage('scm checkout')
+	 {
+	   steps{
+	   
+	     git branch: 'master', url: 'https://github.com/gunjannn/maven-project.git'
+	   }
+    }
+stage ('parallel stage')
 
- stage ('parallel stage')
- parallel
+parallel
 {
 stage('test')
 { 
 steps
 {
 withMaven(jdk: 'localjdk', maven: 'localmaven') 
+{
 sh 'maven test'
+}
 }
 }
 stage('package')
@@ -27,6 +29,7 @@ stage('package')
 steps
 {
 WithMaven(jdk: 'localjdk', maven: 'localmaven')
+{
 sh 'maven package'
 }
 }
