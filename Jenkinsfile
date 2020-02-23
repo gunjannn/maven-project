@@ -24,7 +24,7 @@ stage('package')
 { 
 steps
 {
-WithMaven(jdk: 'localjdk', maven: 'localmaven')
+withMaven(jdk: 'localjdk', maven: 'localmaven')
 {
 sh 'mvn package'
 }}}
