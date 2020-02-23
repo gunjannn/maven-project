@@ -19,7 +19,7 @@ withMaven(jdk: 'localjdk', maven: 'localmaven')
 {
 sh 'maven test'
 }}
-{
+
 stage('package')
 { 
 steps
