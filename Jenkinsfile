@@ -10,8 +10,8 @@ stages
 stage ('parallel stage')
 {
 parallel
-{
-stage('test')
+
+stage('maven test')
 { 
 steps
 {
@@ -33,5 +33,5 @@ sh 'maven package'
 }
 }
 }
-}
+
 
