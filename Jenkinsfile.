@@ -1,0 +1,32 @@
+pipeline {
+environment {
+registry = "dockergunn/tomcat"
+registryCredential = 'dockergunn'
+dockerImage = 'tomcat'
+}
+agent any
+stages {
+stage('Cloning our Git') {
+steps {
+git 'https://github.com/gunjannn/maven-project.git'
+}
+}
+stage('Building our image') {
+steps{
+script {
+dockerImage = docker.build registry + ":$BUILD_NUMBER"
+}
+}
+}
+stage('Deploy our image') {
+steps{
+script {
+docker.withRegistry( 'https://hub.docker.com/repository/docker/dockergunn/tomcat', Gunn@1406 ) {
+dockerImage.push()
+}
+}
+}
+}
+}
+}
+}
