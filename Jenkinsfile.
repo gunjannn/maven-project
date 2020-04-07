@@ -26,6 +26,18 @@ dockerImage.push()
 }
 }
 }
+{
+stage('deploy code')
+{
+steps
+  {
+withMaven(jdk: 'localjdk', maven: 'localmaven') {
+    sh 'mvn deploy'
+   }
+}
+}
+}
+}
 }
 }
 }
