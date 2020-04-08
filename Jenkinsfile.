@@ -2,7 +2,7 @@ pipeline {
 stages {
 stage('Cloning our Git') {
 steps {
-git 'https://github.com/gunjannn/maven-project.git'
+git credentialsId: 'github', url: 'https://github.com/gunjannn/maven-project'
 }
 }
 {
