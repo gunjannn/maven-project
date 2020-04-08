@@ -1,19 +1,20 @@
 node{
 stage('scm checkout')
-steps{
+{
 git 'https://github.com/gunjannn/maven-project.git'
 }
 }
-stage('mvn package')
-{steps{sh label: '', script: 'mvn clean package'
+stage('mvn package'){
+sh label: '', script: 'mvn clean package'
 }
 }
 stage('docker image build')
-{steps{sh label: '', script: 'docker build -t dockergunn/tomcat:1.0.0'
+{
+sh label: '', script: 'docker build -t dockergunn/tomcat:1.0.0'
 }
 }
 stage('push images to dockerhub')
-{steps{
+{
 withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', passwordVariable: 'Gunn@1406', usernameVariable: 'dockergunn')]) {
   sh label: '', script: '''docker login -u dockergunn -p${dockerhubaccount}
 '''
