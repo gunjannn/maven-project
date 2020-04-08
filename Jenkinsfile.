@@ -1,37 +1,22 @@
-node {
-stages {
-stage('Cloning our Git') {
-steps {
-git credentialsId: 'github', url: 'https://github.com/gunjannn/maven-project'
-}
-}
-{
-stage('package')
-{
-steps
-  {
-withMaven(jdk: 'localjdk', maven: 'localmaven') {
-    sh 'mvn package'
-   }
-stage('Building our image') {
+node
+{stages
+{stage('scm checkout')
 steps{
-sh 'docker build -t dockergunn/tomcat:1.0.0 .'
+git 'https://github.com/gunjannn/maven-project.git'
 }
 }
-
-stage('pushing our image') {
-steps{
-sh 'docker login -u dockergunn -p $(dockerhubaccount)'
-sh 'docker push dockergunn/tomcat:1.0.0'
-}
-stage('removing old containers'){
-steps{
-def dockerRM = 'docker rm -f tomcat'
+stage('mvn package')
+{steps{sh label: '', script: 'mvn clean package'
 }
 }
+stage('docker image build')
+{steps{sh label: '', script: 'docker build -t dockergunn/tomcat:1.0.0'
 }
 }
-}
-}
-}
+stage('push images to dockerhub')
+{steps{
+withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', passwordVariable: 'Gunn@1406', usernameVariable: 'dockergunn')]) {
+  sh label: '', script: '''docker login -u dockergunn -p${dockerhubaccount}
+'''
+ sh label: '', script: 'docker push dockergunn/tomcat:1.0.0'
 }
