@@ -1,16 +1,18 @@
 pipeline {
-environment {
-registry = "dockergunn/tomcat"
-registryCredential = 'dockergunn'
-dockerImage = 'tomcat'
-}
-agent any
 stages {
 stage('Cloning our Git') {
 steps {
 git 'https://github.com/gunjannn/maven-project.git'
 }
 }
+{
+stage('package')
+{
+steps
+  {
+withMaven(jdk: 'localjdk', maven: 'localmaven') {
+    sh 'mvn package'
+   }
 stage('Building our image') {
 steps{
 script {
@@ -24,16 +26,6 @@ script {
 docker.withRegistry( 'https://hub.docker.com/repository/docker/dockergunn/tomcat', Gunn@1406 ) {
 dockerImage.push()
 }
-}
-}
-{
-stage('deploy code')
-{
-steps
-  {
-withMaven(jdk: 'localjdk', maven: 'localmaven') {
-    sh 'mvn deploy'
-   }
 }
 }
 }
