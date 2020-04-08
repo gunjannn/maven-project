@@ -1,6 +1,5 @@
-node
-{stages
-{stage('scm checkout')
+node{
+stage('scm checkout')
 steps{
 git 'https://github.com/gunjannn/maven-project.git'
 }
@@ -22,4 +21,4 @@ withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', passwordVar
 }
 }
 }
-}
+
