@@ -1,4 +1,4 @@
-pipeline {
+node {
 stages {
 stage('Cloning our Git') {
 steps {
