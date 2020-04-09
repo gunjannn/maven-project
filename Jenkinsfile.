@@ -3,7 +3,6 @@ stage('scm checkout')
 {
 git 'https://github.com/gunjannn/maven-project.git'
 }
-}
 stage('mvn package'){
 sh label: '', script: 'mvn clean package'
 }
