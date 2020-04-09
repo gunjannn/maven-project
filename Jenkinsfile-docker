@@ -18,8 +18,10 @@ withCredentials([string(credentialsId: 'mydockerhubid', variable: 'mydockerhubid
 }
  sh 'docker push pkw0301/tomcat:latest'
 }
-}
+
 stage('create container')
 {
-sh 'docker run -it pkw0301/tomcat:latest -p 7000:8080'
+sh 'docker pull pkw0301/tomcat:latest'
+sh 'docker run -d -p 7000:8080 --name gun-tomcat pkw0301/tomcat:latest'
+}
 }
