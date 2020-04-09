@@ -12,8 +12,9 @@ stage('docker image build')
 }
 stage('push images to dockerhub')
 {
-withCredentials([usernameColonPassword(credentialsId: 'dockerhubaccount', variable: 'dockerhubaccount')]) {
-   sh "docker login -u dockergunn -p${dockerhubaccount}"
+withCredentials([string(credentialsId: 'dockerhubaccount', variable: 'dockerhubaccount')]) {
+	     sh "docker login -u dockergunn -p ${dockerhubaccount}"
+
 }
  sh 'docker push dockergunn/tomcat:1.0.0'
 }
