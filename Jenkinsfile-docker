@@ -21,5 +21,5 @@ withCredentials([string(credentialsId: 'mydockerhubid', variable: 'mydockerhubid
 }
 stage('create container')
 {
-sh 'docker run -itd pkw0301/tomcat:latest -p 7000:8080'
+sh 'docker run -it pkw0301/tomcat:latest -p 7000:8080'
 }
