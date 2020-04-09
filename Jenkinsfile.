@@ -9,13 +9,13 @@ sh label: '', script: 'mvn clean package'
 }
 stage('docker image build')
 {
-sh label: '', script: 'docker build -t dockergunn/tomcat:1.0.0 .'
+ script: 'docker build -t dockergunn/tomcat:1.0.0 .'
 }
 stage('push images to dockerhub')
 {
 withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', passwordVariable: 'Gunn@1406', usernameVariable: 'dockergunn')]) {
-  sh label: '', script: '''docker login -u dockergunn -p${dockerhubaccount}
+   script: '''docker login -u dockergunn -p${dockerhubaccount}
 '''
- sh label: '', script: 'docker push dockergunn/tomcat:1.0.0'
+ script: 'docker push dockergunn/tomcat:1.0.0'
 }
 }
