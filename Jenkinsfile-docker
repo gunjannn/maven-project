@@ -8,13 +8,13 @@ sh label: '', script: 'mvn clean package'
 }
 stage('docker image build')
 {
- sh 'docker build -t pkw0301/tomcat:1.0.0 .'
+ sh 'docker build -t pkw0301/tomcat:latest .'
 }
 stage('push images to dockerhub')
 {
 withCredentials([string(credentialsId: 'pkwDockerrepo', variable: 'pkwDockerrepo')]) {
-	     sh "docker login -u pkw0301 -p ${pkwDockerrepo}"
+	     sh "docker login -u ${mydockerhubid} -p ${pkwDockerrepo}"
 }
- sh 'docker push pkw0301/tomcat:1.0.0'
+ sh 'docker push pkw0301/tomcat:latest'
 }
 }
