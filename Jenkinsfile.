@@ -18,4 +18,3 @@ withCredentials([string(credentialsId: 'dockerhubaccount', variable: 'dockerhuba
  sh 'docker push dockergunn/tomcat:1.0.0'
 }
 }
-}
