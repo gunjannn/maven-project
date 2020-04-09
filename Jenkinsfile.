@@ -17,3 +17,4 @@ withCredentials([usernamePassword(credentialsId: 'dockerhubaccount', passwordVar
  sh 'docker push dockergunn/tomcat:1.0.0'
 }
 }
+}
