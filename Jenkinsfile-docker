@@ -8,7 +8,7 @@ sh label: '', script: 'mvn clean package'
 }
 stage('docker image build')
 {
- sh 'docker build -t pkw0301/tomcat:latest .'
+ sh 'docker build -t dockergunn/tomcat:latest .'
 }
 stage('push images to dockerhub')
 {
@@ -16,12 +16,12 @@ withCredentials([string(credentialsId: 'mydockerhubid', variable: 'mydockerhubid
 	     sh "docker login -u ${mydockerhubid} -p ${pkwDockerrepo}"
 
 }
- sh 'docker push pkw0301/tomcat:latest'
+ sh 'docker push dockergunn/tomcat:latest'
 }
 
 stage('create container')
 {
-sh 'docker pull pkw0301/tomcat:latest'
-sh 'docker run -d -p 7000:8080 --name gun-tomcat pkw0301/tomcat:latest'
+sh 'docker pull dockergunn/tomcat:latest'
+sh 'docker run -d -p 7000:8080 --name gun-tomcat dockergunn/tomcat:latest'
 }
 }
