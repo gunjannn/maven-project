@@ -1,0 +1,30 @@
+node{
+stage('scm checkout')
+{
+git 'https://github.com/gunjannn/maven-project.git'
+}
+stage('mvn package'){
+sh label: '', script: 'mvn clean package'
+}
+stage('docker image build')
+{
+ sh 'docker build -t dockergunn/tomcat:latest .'
+}
+stage('push images to dockerhub')
+{
+withCredentials([string(credentialsId: 'mydockerhubid', variable: 'mydockerhubid'), string(credentialsId: 'pkwDockerrepo', variable: 'pkwDockerrepo')]) { 
+	     sh "docker login -u ${mydockerhubid} -p ${pkwDockerrepo}"
+
+}
+ sh 'docker push dockergunn/tomcat:latest'
+}
+
+stage('create container')
+{
+sh 'docker pull dockergunn/tomcat:latest'
+sh 'docker run -d -p 7000:8080 --name gun-tomcat dockergunn/tomcat:latest'
+}
+stage('mvn deploy'){
+sh label: '', script: 'mvn deploy'
+}
+}
